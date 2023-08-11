@@ -1,0 +1,20 @@
+/* Your previous styles here */
+
+#word-container {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#word {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+    text-shadow: 1px 1px 1px #ccc;
+}
+
+#start:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

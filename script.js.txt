@@ -1,0 +1,47 @@
+const words = ["apple", "banana", "cherry", "grape", "lemon", "orange", "pear", "strawberry", "watermelon"];
+const wordElement = document.getElementById("word");
+const inputElement = document.getElementById("input");
+const messageElement = document.getElementById("message");
+const startButton = document.getElementById("start");
+const wordContainer = document.getElementById("word-container");
+
+let currentWordIndex = 0;
+let startTime;
+
+function getRandomWord() {
+    return words[Math.floor(Math.random() * words.length)];
+}
+
+function displayWord() {
+    const word = getRandomWord();
+    wordElement.innerText = word;
+    inputElement.value = "";
+    inputElement.focus();
+}
+
+function checkInput() {
+    if (inputElement.value === wordElement.innerText) {
+        currentWordIndex++;
+        if (currentWordIndex === words.length) {
+            const endTime = new Date().getTime();
+            const timeTaken = (endTime - startTime) / 1000;
+            const wordsPerMinute = Math.floor((words.length / timeTaken) * 60);
+            messageElement.innerText = `Congratulations! You typed ${wordsPerMinute} words per minute.`;
+            startButton.disabled = false;
+            wordContainer.style.display = "none";
+        } else {
+            displayWord();
+        }
+    }
+}
+
+startButton.addEventListener("click", function () {
+    currentWordIndex = 0;
+    startTime = new Date().getTime();
+    startButton.disabled = true;
+    messageElement.innerText = "";
+    wordContainer.style.display = "block";
+    displayWord();
+});
+
+inputElement.addEventListener("input", checkInput);
